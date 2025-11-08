@@ -7,6 +7,4 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - run: "echo ${{github.actor}} Started This Process"
-      - run: "ls ${{github.workspace}}"
-      - run: "cd frontend"
-      - run: "ls"
+      - run: "docker build -t frontend:${{github.sha}} frontend"
