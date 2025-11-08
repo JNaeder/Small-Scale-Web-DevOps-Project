@@ -1,12 +1,15 @@
 import "./App.css";
 import { useState } from "react";
+import axios from "axios";
 
 function App() {
   const [userName, setUserName] = useState<string>("");
   const [userMessage, setUserMessage] = useState<string>("");
 
-  const onButtonClick = () => {
+  const onButtonClick = async () => {
     console.log(userName, userMessage);
+    const data = await axios.get("/api");
+    console.log(data.data);
   };
 
   return (
