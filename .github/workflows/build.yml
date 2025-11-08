@@ -1,0 +1,9 @@
+name: Testing
+on: push
+jobs:
+  build-front-end:
+    name: Build Frontend Container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Test
+        run: "echo Testing Github Actions!"
