@@ -11,6 +11,7 @@ jobs:
     name: Build Containers
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}}
       - name: Get Repo Code
         uses: actions/checkout@v5
       - name: Sign Into Digital Ocean CLI
