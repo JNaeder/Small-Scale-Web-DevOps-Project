@@ -11,16 +11,19 @@ jobs:
     name: Build Containers
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}}
       - name: Get Repo Code
         uses: actions/checkout@v5
       - name: Sign Into Digital Ocean CLI
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}}
+      - name: Sign into My Registry
+        run: doctl registry login
       - name: Build and Push Frontend Image
         run: |
-          docker build -t frontend:${{github.sha}} frontend
+          docker build -t registry.digitalocean.com/small-scale-project-repo/frontend:${{github.sha}} frontend
+          docker push registry.digitalocean.com/small-scale-project-repo/frontend:${{github.sha}}
       - name: Build and Push Backend Image
         run: |
-          docker build -t backend:${{github.sha}} backend
+          docker build -t registry.digitalocean.com/small-scale-project-repo/backend:${{github.sha}} backend
+          docker push registry.digitalocean.com/small-scale-project-repo/backend:${{github.sha}}
