@@ -5,16 +5,18 @@ import axios from "axios";
 function App() {
   const [userName, setUserName] = useState<string>("");
   const [userMessage, setUserMessage] = useState<string>("");
+  const [totalURL, setTotalURL] = useState<string>("");
 
   const onButtonClick = async () => {
     console.log(userName, userMessage);
-    const data = await axios.get("/api");
+    // const data = await axios.get("/api");
     // const data = await axios.get("http://localhost:8000");
-    console.log(data.data);
+    // console.log(data.data);
   };
 
   const onTestClick = async () => {
-    const data = await axios.get("/api/testing");
+    const data = await axios.get(totalURL);
+    // const data = await axios.get(`http://localhost:8000${totalURL}`);
     console.log(data.data);
   };
 
@@ -50,6 +52,13 @@ function App() {
             >
               Submit
             </button>
+          </div>
+          <div className="flex justify-center mt-5 items-center gap-2">
+            <div>URI:</div>
+            <input
+              className="bg-white text-black rounded-2xl p-2 w-full"
+              onChange={(e) => setTotalURL(e.target.value)}
+            />
           </div>
           <div className="flex justify-center mt-5 items-center gap-2">
             <button

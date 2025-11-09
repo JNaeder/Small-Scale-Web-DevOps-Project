@@ -16,3 +16,7 @@ def return_test():
 @app.get("/testing")
 def return_test2():
     return {"message": "THIS IS A TEST. TEST 123!TEST 123!TEST 123!TEST 123!"}
+
+@app.get("/api/test")
+def api_test():
+    return {"message": "Look at you. Bang up job"}
