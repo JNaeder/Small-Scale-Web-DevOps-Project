@@ -9,6 +9,12 @@ function App() {
   const onButtonClick = async () => {
     console.log(userName, userMessage);
     const data = await axios.get("/api");
+    // const data = await axios.get("http://localhost:8000");
+    console.log(data.data);
+  };
+
+  const onTestClick = async () => {
+    const data = await axios.get("/api/testing");
     console.log(data.data);
   };
 
@@ -43,6 +49,14 @@ function App() {
               onClick={onButtonClick}
             >
               Submit
+            </button>
+          </div>
+          <div className="flex justify-center mt-5 items-center gap-2">
+            <button
+              className="bg-blue-500 px-5 py-2 rounded-2xl text-2xl"
+              onClick={onTestClick}
+            >
+              Testing
             </button>
           </div>
         </div>
