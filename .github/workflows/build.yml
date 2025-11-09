@@ -21,9 +21,9 @@ jobs:
         run: doctl registry login
       - name: Build and Push Frontend Image
         run: |
-          docker build -t registry.digitalocean.com/small-scale-project-repo/frontend:${{github.sha}} frontend
-          docker push registry.digitalocean.com/small-scale-project-repo/frontend:${{github.sha}}
+          docker build -t registry.digitalocean.com/small-scale-project-repo/my-app:frontend frontend
+          docker push registry.digitalocean.com/small-scale-project-repo/my-app:frontend
       - name: Build and Push Backend Image
         run: |
-          docker build -t registry.digitalocean.com/small-scale-project-repo/backend:${{github.sha}} backend
-          docker push registry.digitalocean.com/small-scale-project-repo/backend:${{github.sha}}
+          docker build -t registry.digitalocean.com/small-scale-project-repo/my-app:backend backend
+          docker push registry.digitalocean.com/small-scale-project-repo/my-app:backend
