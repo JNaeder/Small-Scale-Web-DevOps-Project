@@ -13,17 +13,3 @@ jobs:
     steps:
       - name: Get Repo Code
         uses: actions/checkout@v5
-      - name: Sign Into Digital Ocean CLI
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}}
-      - name: Sign into My Registry
-        run: doctl registry login
-      - name: Build and Push Frontend Image
-        run: |
-          docker build -t registry.digitalocean.com/small-scale-project-repo/my-app:frontend frontend
-          docker push registry.digitalocean.com/small-scale-project-repo/my-app:frontend
-      - name: Build and Push Backend Image
-        run: |
-          docker build -t registry.digitalocean.com/small-scale-project-repo/my-app:backend backend
-          docker push registry.digitalocean.com/small-scale-project-repo/my-app:backend
