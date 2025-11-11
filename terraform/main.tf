@@ -1,4 +1,10 @@
 terraform {
+  cloud {
+    organization = "jnaeder"
+    workspaces {
+      name = "small-scale-devops"
+    }
+  }
   required_providers {
     digitalocean = {
         source = "digitalocean/digitalocean"
