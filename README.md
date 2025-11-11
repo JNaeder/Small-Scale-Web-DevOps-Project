@@ -11,3 +11,9 @@ The plan is to have
 - Database: ???? Not Sure Yet
 - IaC: Terraform
 - Cloud: ???? Not Sure Yet
+
+Terraform:
+need terraform.tfvars file with:
+
+- digitalocean-api-key
+- digitalocean-ssh-public-key
