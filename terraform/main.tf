@@ -13,17 +13,16 @@ terraform {
   }
 }
 
-variable "digitalocean-api-key" {}
-variable "digitalocean-ssh-public-key" {}
+variable "digitalocean_api_key" {}
+variable "digitalocean_ssh_public_key" {}
 
 provider "digitalocean" {
-  token = var.digitalocean-api-key
+  token = var.digitalocean_api_key
 }
 
 resource "digitalocean_ssh_key" "ssh-key" {
     name = "terraform-key"
-    public_key = var.digitalocean-ssh-public-key
-  
+    public_key = var.digitalocean_ssh_public_key
 }
 
 resource "digitalocean_droplet" "main" {
