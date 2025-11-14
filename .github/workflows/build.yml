@@ -28,6 +28,7 @@ jobs:
           cd terraform
           terraform init
           terraform apply -auto-approve
+          terraform output -raw public_ip
           ip=$(terraform output -raw public_ip)
           echo "public_ip=$ip" >> "$GITHUB_OUTPUT"
   copy-files:
