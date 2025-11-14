@@ -1,0 +1,17 @@
+services:
+  frontend:
+    image: jnaeder324/small-frontend
+    ports:
+      - "80:80"
+    networks:
+      - my-network
+
+  backend:
+    image: jnaeder324/small-backend
+    ports:
+      - "8000:8000"
+    networks:
+      - my-network
+
+networks:
+  my-network: {}
