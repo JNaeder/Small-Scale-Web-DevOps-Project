@@ -12,7 +12,7 @@ jobs:
     needs: check-code
     runs-on: ubuntu-latest
     outputs:
-      public_ip: ${{steps.main.outputs.test}}
+      public_ip: ${{steps.main.outputs.public_ip}}
     env:
       TF_VAR_digitalocean_ssh_public_key: ${{secrets.TF_VAR_DIGITALOCEAN_SSH_PUBLIC_KEY}}
       TF_VAR_digitalocean_api_key: ${{secrets.TV_VAR_DIGITALOCEAN_API_KEY}}
@@ -36,14 +36,11 @@ jobs:
     needs: setup-terraform
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          ls
-          pwd
-          echo ${{needs.setup-terraform.outputs.public_ip}}
-      # - uses: appleboy/scp-action@v1
-      #   with:
-      #     host: ${{needs.setup-terraform.outputs.public_ip}}
-      #     username: "root"
-      #     key_path: ${{secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY}}
-      #     source: "setup-docker.sh, docker-compose.yml"
-      #     target: "/root"
+      - uses: actions/checkout@v5
+      - uses: appleboy/scp-action@v1
+        with:
+          host: ${{needs.setup-terraform.outputs.public_ip}}
+          username: "root"
+          key: ${{secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY}}
+          source: "setup-docker.sh, docker-compose.yml"
+          target: "/root"
