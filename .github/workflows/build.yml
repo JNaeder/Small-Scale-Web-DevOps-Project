@@ -31,8 +31,8 @@ jobs:
           terraform output -raw public_ip
           ip=$(terraform output -raw public_ip)
           echo "public_ip=$ip" >> "$GITHUB_OUTPUT"
-  copy-files:
-    name: Copy Files
+  run-server:
+    name: Run Server
     needs: setup-terraform
     runs-on: ubuntu-latest
     steps:
@@ -44,3 +44,11 @@ jobs:
           key: ${{secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY}}
           source: "setup-docker.sh, docker-compose.yml"
           target: "/root"
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{needs.setup-terraform.outputs.public_ip}}
+          username: "root"
+          key: ${{secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY}}
+          script: |
+            chmod u+x setup-docker.sh
+            ./setup-docker.sh
