@@ -7,9 +7,12 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: trufflesecurity/trufflehog@main
-  build-front-end:
-    name: Build Containers
+  setup-terraform:
+    name: Setup Terraform
+    needs: check-code
     runs-on: ubuntu-latest
+    outputs:
+      public_ip: ${{steps.main.outputs.test}}
     env:
       TF_VAR_digitalocean_ssh_public_key: ${{secrets.TF_VAR_DIGITALOCEAN_SSH_PUBLIC_KEY}}
       TF_VAR_digitalocean_api_key: ${{secrets.TV_VAR_DIGITALOCEAN_API_KEY}}
@@ -20,7 +23,21 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           cli_config_credentials_token: ${{secrets.TF_API_TOKEN}}
-      - run: |
+      - id: main
+        run: |
           cd terraform
           terraform init
           terraform plan
+          terraform output public_ip >> "$GITHUB_OUTPUT"
+  copy-files:
+    name: Copy Files
+    needs: setup-terraform
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/scp-action@v1
+        with:
+          host: ${{needs.setup-terraform.outputs.public_ip}}
+          username: "root"
+          key_path: ${{secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY}}
+          source: "setup-docker.sh, docker-compose.yml"
+          target: "/root"
