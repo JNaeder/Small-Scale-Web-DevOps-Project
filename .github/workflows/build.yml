@@ -28,7 +28,8 @@ jobs:
           cd terraform
           terraform init
           terraform plan
-          terraform output public_ip >> "$GITHUB_OUTPUT"
+          ip=$(terraform output -raw public_ip)
+          echo "public_ip=$ip" >> "$GITHUB_OUTPUT"
   copy-files:
     name: Copy Files
     needs: setup-terraform
