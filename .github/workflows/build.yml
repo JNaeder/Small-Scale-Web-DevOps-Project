@@ -35,10 +35,14 @@ jobs:
     needs: setup-terraform
     runs-on: ubuntu-latest
     steps:
-      - uses: appleboy/scp-action@v1
-        with:
-          host: ${{needs.setup-terraform.outputs.public_ip}}
-          username: "root"
-          key_path: ${{secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY}}
-          source: "setup-docker.sh, docker-compose.yml"
-          target: "/root"
+      - run: |
+          ls
+          pwd
+          echo ${{needs.setup-terraform.outputs.public_ip}}
+      # - uses: appleboy/scp-action@v1
+      #   with:
+      #     host: ${{needs.setup-terraform.outputs.public_ip}}
+      #     username: "root"
+      #     key_path: ${{secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY}}
+      #     source: "setup-docker.sh, docker-compose.yml"
+      #     target: "/root"
