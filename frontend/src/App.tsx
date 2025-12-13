@@ -15,8 +15,12 @@ function App() {
   };
 
   const onTestClick = async () => {
-    const data = await axios.get(totalURL);
-    // const data = await axios.get(`http://localhost:8000${totalURL}`);
+    // const data = await axios.get(totalURL);
+    // console.log(import.meta.env.VITE_BACKEND_URL);
+    // console.log(totalURL);
+    const data = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}${totalURL}`
+    );
     console.log(data.data);
   };
 
