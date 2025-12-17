@@ -18,9 +18,9 @@ function App() {
     // const data = await axios.get(totalURL);
     // console.log(import.meta.env.VITE_BACKEND_URL);
     // console.log(totalURL);
-    const data = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}${totalURL}`
-    );
+    const url = `${import.meta.env.VITE_BACKEND_URL}${totalURL}`;
+    console.log(url);
+    const data = await axios.get(url);
     console.log(data.data);
   };
 
