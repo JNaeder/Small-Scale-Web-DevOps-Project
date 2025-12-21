@@ -28,6 +28,8 @@ jobs:
           context: frontend
           push: true
           tags: jnaeder324/small-frontend
+          build-args: |
+            VITE_BACKEND_URL=""
       - name: Build and push backend
         uses: docker/build-push-action@v6
         with:
@@ -36,7 +38,7 @@ jobs:
           tags: jnaeder324/small-backend
   setup-terraform:
     name: Setup Terraform
-    needs: check-code
+    needs: build-docker-images
     runs-on: ubuntu-latest
     outputs:
       public_ip: ${{steps.main.outputs.public_ip}}

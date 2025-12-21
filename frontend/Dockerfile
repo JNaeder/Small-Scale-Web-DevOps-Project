@@ -4,6 +4,9 @@ WORKDIR /app
 
 COPY . .
 
+ARG VITE_BACKEND_URL
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+
 RUN npm install
 RUN npm run build
 
