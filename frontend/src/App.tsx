@@ -9,19 +9,23 @@ function App() {
 
   const onButtonClick = async () => {
     console.log(userName, userMessage);
-    // const data = await axios.get("/api");
-    // const data = await axios.get("http://localhost:8000");
-    // console.log(data.data);
   };
 
   const onTestClick = async () => {
-    // const data = await axios.get(totalURL);
-    // console.log(import.meta.env.VITE_BACKEND_URL);
-    // console.log(totalURL);
-    const url = `${import.meta.env.VITE_BACKEND_URL}${totalURL}`;
-    console.log(url);
-    const data = await axios.get(url);
-    console.log(data.data);
+    const urlRoot = import.meta.env.VITE_BACKEND_URL;
+    if (urlRoot) {
+      console.log("URL Root:", urlRoot);
+      const url = `${urlRoot}${totalURL}`;
+      console.log(url);
+      const data = await axios.get(url);
+      console.log(data.data);
+    } else {
+      console.log("No URL Root");
+      const url = `${totalURL}`;
+      console.log(url);
+      const data = await axios.get(url);
+      console.log(data.data);
+    }
   };
 
   return (
