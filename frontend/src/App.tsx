@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div className="w-dvw">
-        <h1 className="text-5xl font-bold">Small Scale Test Project</h1>
+        <h1 className="text-5xl font-bold">Small Scale Test Project v0.0.1</h1>
         <div className="grid grid-cols-2 gap-2">
           <AllMessages />
           <NewMessage />
