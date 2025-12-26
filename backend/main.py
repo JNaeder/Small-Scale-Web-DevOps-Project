@@ -1,5 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+from test_data import test_data
+
+
+class Message(BaseModel):
+    name: str
+    message: str
+    datetime: str
+    feeling: float
+
 
 app = FastAPI()
 
@@ -26,3 +37,13 @@ def api_test():
 @app.get("/api/another")
 def api_test_2():
     return {"message": "This is one more test. Just to see if things are working"}
+
+
+@app.get("/api/messages")
+def get_all_messages():
+    return test_data
+
+
+@app.post("/api/message/")
+def post_new_message(new_message: Message):
+    return new_message

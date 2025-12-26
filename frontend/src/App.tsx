@@ -1,52 +1,36 @@
 import "./App.css";
-import { useState } from "react";
-import axios from "axios";
+import NewMessage from "./NewMessage";
+import AllMessages from "./AllMessages";
 
 function App() {
-  const [userName, setUserName] = useState<string>("");
-  const [userMessage, setUserMessage] = useState<string>("");
-  const [totalURL, setTotalURL] = useState<string>("");
-
-  const onButtonClick = async () => {
-    console.log(userName, userMessage);
-  };
-
-  const onTestClick = async () => {
-    const urlRoot = import.meta.env.VITE_BACKEND_URL;
-    if (urlRoot) {
-      console.log("URL Root:", urlRoot);
-      const url = `${urlRoot}${totalURL}`;
-      console.log(url);
-      const data = await axios.get(url);
-      console.log(data.data);
-    } else {
-      console.log("No URL Root");
-      const url = `${totalURL}`;
-      console.log(url);
-      const data = await axios.get(url);
-      console.log(data.data);
-    }
-  };
-
   return (
     <>
-      <div>
+      <div className="w-dvw">
         <h1 className="text-5xl font-bold">Small Scale Test Project</h1>
-        <p>
-          This is my test project for building frontend and backend website with
-          docker containers
-        </p>
-        <p>Please write your name in the box to record that you were here.</p>
-        <div className="w-1/2 mx-auto p-4">
-          <div className="flex justify-center mt-5 items-center gap-2">
-            <div>Name:</div>
+        <div className="grid grid-cols-2 gap-2">
+          <AllMessages />
+          <NewMessage />
+          {/* <div className="flex justify-center mt-5 items-center gap-2">
+            <div>What's your name?</div>
             <input
               className="bg-white text-black rounded-2xl p-2 w-full"
               onChange={(e) => setUserName(e.target.value)}
             />
           </div>
           <div className="flex justify-center mt-5 items-center gap-2">
-            <div>Message:</div>
+            <div>How are you feeling?</div>
+            <input
+              type="range"
+              min="0"
+              max="10"
+              value={userFeeling}
+              step={0.5}
+              onChange={(e) => setUserFeeling(Number(e.target.value))}
+            />
+            <div>{userFeeling.toFixed(1)}</div>
+          </div>
+          <div className="flex justify-center mt-5 items-center gap-2">
+            <div>What's going on?:</div>
             <textarea
               className="bg-white text-black rounded-2xl p-2 w-full"
               rows={3}
@@ -60,22 +44,7 @@ function App() {
             >
               Submit
             </button>
-          </div>
-          <div className="flex justify-center mt-5 items-center gap-2">
-            <div>URI:</div>
-            <input
-              className="bg-white text-black rounded-2xl p-2 w-full"
-              onChange={(e) => setTotalURL(e.target.value)}
-            />
-          </div>
-          <div className="flex justify-center mt-5 items-center gap-2">
-            <button
-              className="bg-blue-500 px-5 py-2 rounded-2xl text-2xl"
-              onClick={onTestClick}
-            >
-              Testing
-            </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
