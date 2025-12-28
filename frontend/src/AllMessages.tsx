@@ -12,16 +12,16 @@ export default function AllMessages() {
       const url = urlRoot ? `${urlRoot}/api/messages` : `/api/messages`;
       const response = await axios.get(url);
       setAllMessages(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     };
     getData();
   }, []);
 
   return (
-    <div>
-      <div className="flex flex-col gap-4 mt-2">
-        {allMessages.map((aMessage: message) => (
-          <MessageBox message={aMessage} />
+    <div className="col-span-3 mt-2 px-10 overflow-scroll">
+      <div className="flex flex-col gap-2 h-200">
+        {allMessages.map((aMessage: message, i: number) => (
+          <MessageBox message={aMessage} key={i} />
         ))}
       </div>
     </div>

@@ -46,4 +46,5 @@ def get_all_messages():
 
 @app.post("/api/message/")
 def post_new_message(new_message: Message):
+    test_data.append(new_message)
     return new_message

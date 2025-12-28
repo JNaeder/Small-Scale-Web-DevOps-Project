@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import type { message } from "./types";
+import { convertFeelingToEmoji } from "./helperFunctions";
 
 export default function NewMessage() {
   const [userName, setUserName] = useState<string>("");
@@ -23,28 +24,32 @@ export default function NewMessage() {
   };
 
   return (
-    <div>
-      <div className="flex justify-center mt-5 items-center gap-2">
-        <div>What's your name?</div>
+    <div className="col-span-4 mx-auto w-full px-20">
+      <div className="flex flex-col justify-center mt-5 items-center gap-2">
+        <div className="w-full text-xl">What's your name?</div>
         <input
           className="bg-white text-black rounded-2xl p-2 w-full"
           onChange={(e) => setUserName(e.target.value)}
         />
       </div>
-      <div className="flex justify-center mt-5 items-center gap-2">
-        <div>How are you feeling?</div>
-        <input
-          type="range"
-          min="0"
-          max="10"
-          value={userFeeling}
-          step={0.5}
-          onChange={(e) => setUserFeeling(Number(e.target.value))}
-        />
-        <div>{userFeeling.toFixed(1)}</div>
+      <div className="flex flex-col justify-center mt-5 items-center gap-2">
+        <div className="w-full text-xl">How are you feeling?</div>
+        <div className="flex w-full">
+          <input
+            className="w-full"
+            type="range"
+            min="0"
+            max="10"
+            value={userFeeling}
+            step={0.5}
+            onChange={(e) => setUserFeeling(Number(e.target.value))}
+          />
+          <div className="text-4xl">{userFeeling.toFixed(1)}</div>
+          <div className="text-4xl">{convertFeelingToEmoji(userFeeling)}</div>
+        </div>
       </div>
-      <div className="flex justify-center mt-5 items-center gap-2">
-        <div>What's going on?:</div>
+      <div className="flex flex-col justify-center mt-5 items-center gap-2">
+        <div className="w-full text-xl">What's going on?:</div>
         <textarea
           className="bg-white text-black rounded-2xl p-2 w-full"
           rows={3}
@@ -53,7 +58,7 @@ export default function NewMessage() {
       </div>
       <div className="flex justify-center mt-5 items-center gap-2">
         <button
-          className="bg-blue-500 px-5 py-2 rounded-2xl text-2xl"
+          className="bg-blue-900 px-5 py-2 rounded-2xl text-2xl"
           onClick={onButtonClick}
         >
           Submit
