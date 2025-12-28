@@ -21,6 +21,7 @@ export default function NewMessage() {
 
     const data = await axios.post(url, new_message);
     console.log(data.data);
+    window.location.reload();
   };
 
   return (
@@ -58,7 +59,7 @@ export default function NewMessage() {
       </div>
       <div className="flex justify-center mt-5 items-center gap-2">
         <button
-          className="bg-violet-900 px-5 py-2 rounded-2xl text-2xl"
+          className="bg-red-900 px-5 py-2 rounded-2xl text-2xl"
           onClick={onButtonClick}
         >
           Submit

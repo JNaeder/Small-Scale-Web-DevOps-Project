@@ -8,12 +8,15 @@ The plan is to have
 
 - Frontend: React (TailwindCSS)
 - Backend: Python (FastAPI)
-- Database: ???? Not Sure Yet
+- Database: CockroachDB
 - IaC: Terraform
-- Cloud: ???? Not Sure Yet
+- Cloud: DigitalOcean
 
 Terraform:
 need terraform.tfvars file with:
 
-- digitalocean-api-key
-- digitalocean-ssh-public-key
+- digitalocean_ssh_public_key
+- digitalocean_api_key
+- digitalocean_domain_name
+- cockroach_db_api_key
+- cockroach_sql_user_password

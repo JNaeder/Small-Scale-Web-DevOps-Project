@@ -23,22 +23,6 @@ app.add_middleware(
 )
 
 
-@app.get("/api")
-@app.get("/api/")
-def return_test():
-    return {"message": "You are in the API! Nice"}
-
-
-@app.get("/api/test")
-def api_test():
-    return {"message": "Look at you. Bang up job"}
-
-
-@app.get("/api/another")
-def api_test_2():
-    return {"message": "This is one more test. Just to see if things are working"}
-
-
 @app.get("/api/messages")
 def get_all_messages():
     return test_data
@@ -46,5 +30,5 @@ def get_all_messages():
 
 @app.post("/api/message/")
 def post_new_message(new_message: Message):
-    test_data.append(new_message)
+    test_data.insert(0, new_message)
     return new_message
