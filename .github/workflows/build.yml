@@ -60,7 +60,7 @@ jobs:
           cd terraform
           terraform init
           terraform apply -auto-approve
-          terraform output -raw public_ip
+          terraform output -raw vm_public_ip
           ip=$(terraform output -raw vm_public_ip)
           echo "vm_public_ip=$ip" >> "$GITHUB_OUTPUT"
   run-server:
