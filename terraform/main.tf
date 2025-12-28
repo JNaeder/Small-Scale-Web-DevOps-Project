@@ -15,6 +15,7 @@ terraform {
 
 variable "digitalocean_api_key" {}
 variable "digitalocean_ssh_public_key" {}
+variable "digitalocean_domain_name" {}
 
 provider "digitalocean" {
   token = var.digitalocean_api_key
@@ -78,6 +79,12 @@ resource "digitalocean_project" "small-scale-devops-project" {
     name = "Small Scale DevOps Project"
     environment = "Production"
     resources = [ digitalocean_droplet.main.urn ]
+}
+
+resource "digitalocean_domain" "default" {
+  name = var.digitalocean_domain_name
+  ip_address = digitalocean_droplet.main.ipv4_address
+  
 }
 
 output "public_ip" {

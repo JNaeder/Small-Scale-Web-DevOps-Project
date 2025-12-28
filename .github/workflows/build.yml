@@ -45,6 +45,7 @@ jobs:
     env:
       TF_VAR_digitalocean_ssh_public_key: ${{secrets.TF_VAR_DIGITALOCEAN_SSH_PUBLIC_KEY}}
       TF_VAR_digitalocean_api_key: ${{secrets.TV_VAR_DIGITALOCEAN_API_KEY}}
+      TF_VAR_digitalocean_domain_name: ${{vars.TF_VAR_DIGITALOCEAN_DOMAIN_NAME}}
     steps:
       - name: Get Repo Code
         uses: actions/checkout@v5

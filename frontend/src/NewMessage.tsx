@@ -58,7 +58,7 @@ export default function NewMessage() {
       </div>
       <div className="flex justify-center mt-5 items-center gap-2">
         <button
-          className="bg-blue-900 px-5 py-2 rounded-2xl text-2xl"
+          className="bg-violet-900 px-5 py-2 rounded-2xl text-2xl"
           onClick={onButtonClick}
         >
           Submit
