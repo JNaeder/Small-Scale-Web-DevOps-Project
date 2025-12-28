@@ -41,7 +41,7 @@ jobs:
     needs: build-docker-images
     runs-on: ubuntu-latest
     outputs:
-      public_ip: ${{steps.main.outputs.public_ip}}
+      vm_public_ip: ${{steps.main.outputs.vm_public_ip}}
     env:
       TF_VAR_digitalocean_ssh_public_key: ${{secrets.TF_VAR_DIGITALOCEAN_SSH_PUBLIC_KEY}}
       TF_VAR_digitalocean_api_key: ${{secrets.TV_VAR_DIGITALOCEAN_API_KEY}}
@@ -71,14 +71,14 @@ jobs:
       - uses: actions/checkout@v5
       - uses: appleboy/scp-action@v1
         with:
-          host: ${{needs.setup-terraform.outputs.public_ip}}
+          host: ${{needs.setup-terraform.outputs.vm_public_ip}}
           username: "root"
           key: ${{secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY}}
           source: "setup-docker.sh, docker-compose.yml"
           target: "/root"
       - uses: appleboy/ssh-action@v1
         with:
-          host: ${{needs.setup-terraform.outputs.public_ip}}
+          host: ${{needs.setup-terraform.outputs.vm_public_ip}}
           username: "root"
           key: ${{secrets.DIGITAL_OCEAN_SSH_PRIVATE_KEY}}
           script: |
